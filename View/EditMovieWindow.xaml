@@ -1,0 +1,30 @@
+﻿<Window x:Class="ManageMoviesDBApp.View.EditMovieWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ManageMoviesDBApp.View"
+        mc:Ignorable="d"
+        Title="EditMovieWindow" Height="300" Width="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="70"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Vertical"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Height="200"
+                    Width="290">
+            <TextBlock Text="New movie name" />
+            <TextBox Text=""/>
+            <TextBlock Text="New year"/>
+            <TextBox Text=""/>
+            <TextBlock Text="New rating"/>
+            <TextBox Text=""/>
+            <TextBlock Text="New studio"/>
+            <ComboBox/>
+        </StackPanel>
+        <Button Grid.Row="1" Content="Edit movie"/>
+    </Grid>
+</Window>
