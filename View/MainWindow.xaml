@@ -74,10 +74,10 @@
         <StackPanel Grid.Row="1"
                     Orientation="Horizontal"
                     HorizontalAlignment="Center">
-            <Button MinWidth="200" Content="New Movie" Command="{Binding}"/>
-            <Button MinWidth="200" Content="New Genre" Command="{Binding}"/>
-            <Button MinWidth="200" Content="New Studio" Command="{Binding}"/>
-            <Button MinWidth="200" Content="New Country" Command="{Binding}"/>
+            <Button MinWidth="200" Content="New Movie" Command="{Binding OpenAddNewMovieWindow}"/>
+            <Button MinWidth="200" Content="New Genre" Command="{Binding OpenAddNewGenreWindow}"/>
+            <Button MinWidth="200" Content="New Studio" Command="{Binding OpenAddNewStudioWindow}"/>
+            <Button MinWidth="200" Content="New Country" Command="{Binding OpenAddNewCountryWindow}"/>
         </StackPanel>
 
     </Grid>

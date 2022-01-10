@@ -15,7 +15,7 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Height="200"
-                    Width="290">
+                    Width="250">
             <TextBlock Text="Studio name"/>
             <TextBox Text=""/>
             <TextBlock Text="Country"/>

@@ -65,7 +65,61 @@ namespace ManageMoviesDBApp.ViewModel
             }
         }
 
-        #region METHODS TO OPEN WINDOW
+        #region COMMANDS TO OPEN WONDOWS
+        private RelayCommand openAddNewCountryWindow;
+        public RelayCommand OpenAddNewCountryWindow
+        {
+            get
+            {
+                return openAddNewCountryWindow ?? new RelayCommand(obj =>
+                {
+                    OpenAddNewCountryWindowMethod();
+                }
+                );
+            }
+        }
+
+        private RelayCommand openAddNewGenreWindow;
+        public RelayCommand OpenAddNewGenreWindow
+        {
+            get
+            {
+                return openAddNewGenreWindow ?? new RelayCommand(obj =>
+                {
+                    OpenAddNewGenreWindowMethod();
+                }
+                );
+            }
+        }
+
+        private RelayCommand openAddNewMovieWindow;
+        public RelayCommand OpenAddNewMovieWindow
+        {
+            get
+            {
+                return openAddNewMovieWindow ?? new RelayCommand(obj =>
+                {
+                    OpenAddNewMovieWindowMethod();
+                }
+                );
+            }
+        }
+
+        private RelayCommand openAddNewStudioWindow;
+        public RelayCommand OpenAddNewStudioWindow
+        {
+            get
+            {
+                return openAddNewStudioWindow ?? new RelayCommand(obj =>
+                {
+                    OpenAddNewStudioWindowMethod();
+                }
+                );
+            }
+        }
+        #endregion
+
+        #region METHODS TO OPEN WINDOWS
         private void OpenAddNewCountryWindowMethod()
         {
             AddNewCountryWindow addNewCountryWindow = new AddNewCountryWindow();
