@@ -234,6 +234,8 @@ namespace ManageMoviesDBApp.Model
             return result;
         }
 
-
+        internal class Get
+        {
+        }
     }
 }
