@@ -67,7 +67,22 @@ namespace ManageMoviesDBApp.ViewModel
             }
         }
 
+        //properties for Country
         public string CountryName { get; set; }
+
+        //properties for Genre
+        public string GenreName { get; set; }
+
+        //properties for Movie
+        public string MovieName { get; set; }
+        public List<Genre> Genres { get; set; }
+        public Studio Studio { get; set; }
+        public int Year { get; set; }
+        public double Rating { get; set; }
+
+        //properties for Studio
+        public string StudioName { get; set; }
+        public Country Country { get; set; }
 
         #region COMMANDS TO ADD
         private RelayCommand addNewCountry;
@@ -86,7 +101,35 @@ namespace ManageMoviesDBApp.ViewModel
                     else
                     {
                         resultStr = DataWorker.CreateCountry(CountryName);
+                        UpdateAllViews();
                         ShowMessageToUser(resultStr);
+                        SetNullValueToProperties();
+                        window.Close();
+                    }
+                }
+                );
+            }
+        }
+
+        private RelayCommand addNewGenre;
+        public RelayCommand AddNewGenre
+        {
+            get
+            {
+                return addNewGenre ?? new RelayCommand(obj =>
+                {
+                    Window window = obj as Window;
+                    string resultStr = string.Empty;
+                    if (string.IsNullOrWhiteSpace(GenreName))
+                    {
+                        SetRedBlockControl(window, "GenreNameBlock");
+                    }
+                    else
+                    {
+                        resultStr = DataWorker.CreateGenre(GenreName);
+                        UpdateAllViews();
+                        ShowMessageToUser(resultStr);
+                        SetNullValueToProperties();
                         window.Close();
                     }
                 }
@@ -95,7 +138,7 @@ namespace ManageMoviesDBApp.ViewModel
         }
         #endregion
 
-        #region COMMANDS TO OPEN WONDOWS
+        #region COMMANDS TO OPEN WINDOWS
         private RelayCommand openAddNewCountryWindow;
         public RelayCommand OpenAddNewCountryWindow
         {
@@ -202,6 +245,55 @@ namespace ManageMoviesDBApp.ViewModel
             window.Owner = Application.Current.MainWindow;
             window.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             window.ShowDialog();
+        }
+        #endregion
+
+        #region UPDATE VIEWS
+        private void SetNullValueToProperties()
+        {
+            CountryName = null;
+            GenreName = null;
+        }
+
+        private void UpdateAllViews()
+        {
+            UpdateAllCountriesView();
+            UpdateAllGenresView();
+            UpdateAllMoviesView();
+            UpdateAllStudiosView();
+        }
+        
+        private void UpdateAllCountriesView()
+        {
+            AllCountries = DataWorker.GetAllCountries();
+            MainWindow.AllCountriesView.ItemsSource = null;
+            MainWindow.AllCountriesView.Items.Clear();
+            MainWindow.AllCountriesView.ItemsSource = AllCountries;
+            MainWindow.AllCountriesView.Items.Refresh();
+        }
+        private void UpdateAllGenresView()
+        {
+            AllGenres = DataWorker.GetAllGenres();
+            MainWindow.AllGenresView.ItemsSource = null;
+            MainWindow.AllGenresView.Items.Clear();
+            MainWindow.AllGenresView.ItemsSource = AllGenres;
+            MainWindow.AllGenresView.Items.Refresh();
+        }
+        private void UpdateAllMoviesView()
+        {
+            AllMovies = DataWorker.GetAllMovies();
+            MainWindow.AllMoviesView.ItemsSource = null;
+            MainWindow.AllMoviesView.Items.Clear();
+            MainWindow.AllMoviesView.ItemsSource = AllMovies;
+            MainWindow.AllMoviesView.Items.Refresh();
+        }
+        private void UpdateAllStudiosView()
+        {
+            AllStudios = DataWorker.GetAllStudios();
+            MainWindow.AllStudiosView.ItemsSource = null;
+            MainWindow.AllStudiosView.Items.Clear();
+            MainWindow.AllStudiosView.ItemsSource = AllStudios;
+            MainWindow.AllStudiosView.Items.Refresh();
         }
         #endregion
 

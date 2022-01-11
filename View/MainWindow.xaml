@@ -16,7 +16,7 @@
                 <TabItem.Header>
                     <TextBlock Text="Movie"/>
                 </TabItem.Header>
-                <ListView ItemsSource="{Binding AllMovies}">
+                <ListView x:Name="ViewAllMovies" ItemsSource="{Binding AllMovies}">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Movie name"/>
@@ -32,10 +32,11 @@
                 <TabItem.Header>
                     <TextBlock Text="Genre"/>
                 </TabItem.Header>
-                <ListView ItemsSource="{Binding AllGenres}">
+                <ListView x:Name="ViewAllGenres" ItemsSource="{Binding AllGenres}">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="Genre name"/>
+                            <GridViewColumn Header="Genre name"
+                                             DisplayMemberBinding="{Binding Path=Name}"/>
                         </GridView>
                     </ListView.View>
                 </ListView>
@@ -44,7 +45,7 @@
                 <TabItem.Header>
                     <TextBlock Text="Studio"/>
                 </TabItem.Header>
-                <ListView ItemsSource="{Binding AllStudios}">
+                <ListView x:Name="ViewAllStudios" ItemsSource="{Binding AllStudios}">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Studion name"/>
@@ -57,7 +58,7 @@
                 <TabItem.Header>
                     <TextBlock Text="Country"/>
                 </TabItem.Header>
-                <ListView ItemsSource="{Binding AllCountries}">
+                <ListView x:Name="ViewAllCountries" ItemsSource="{Binding AllCountries}">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Country name"
