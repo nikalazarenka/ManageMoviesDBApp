@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace ManageMoviesDBApp.ViewModel
 {
@@ -64,6 +66,34 @@ namespace ManageMoviesDBApp.ViewModel
                 allStudios = value;
             }
         }
+
+        public string CountryName { get; set; }
+
+        #region COMMANDS TO ADD
+        private RelayCommand addNewCountry;
+        public RelayCommand AddNewCountry
+        {
+            get
+            {
+                return addNewCountry ?? new RelayCommand(obj =>
+                {
+                    Window window = obj as Window;
+                    string resultStr = string.Empty;
+                    if(string.IsNullOrWhiteSpace(CountryName))
+                    {
+                        SetRedBlockControl(window, "CountryNameBlock");
+                    }
+                    else
+                    {
+                        resultStr = DataWorker.CreateCountry(CountryName);
+                        ShowMessageToUser(resultStr);
+                        window.Close();
+                    }
+                }
+                );
+            }
+        }
+        #endregion
 
         #region COMMANDS TO OPEN WONDOWS
         private RelayCommand openAddNewCountryWindow;
@@ -174,6 +204,18 @@ namespace ManageMoviesDBApp.ViewModel
             window.ShowDialog();
         }
         #endregion
+
+        private void SetRedBlockControl(Window window, string blockName)
+        {
+            Control block = window.FindName(blockName) as Control;
+            block.BorderBrush = Brushes.Red;
+        }
+
+        private void ShowMessageToUser(string message)
+        {
+            MessageWindow messageWindow = new MessageWindow(message);
+            SetCenterPositionAndOpen(messageWindow);
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged(String propertyName)

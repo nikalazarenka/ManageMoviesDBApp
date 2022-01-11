@@ -19,7 +19,7 @@
                 <ListView ItemsSource="{Binding AllMovies}">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="Film name"/>
+                            <GridViewColumn Header="Movie name"/>
                             <GridViewColumn Header="Genre"/>
                             <GridViewColumn Header="Studio"/>
                             <GridViewColumn Header="Year"/>
@@ -60,7 +60,8 @@
                 <ListView ItemsSource="{Binding AllCountries}">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="Country name"/>
+                            <GridViewColumn Header="Country name"
+                                            DisplayMemberBinding="{Binding Path=Name}"/>
                         </GridView>
                     </ListView.View>
                 </ListView>

@@ -19,9 +19,15 @@ namespace ManageMoviesDBApp.View
     /// </summary>
     public partial class MessageWindow : Window
     {
-        public MessageWindow()
+        public MessageWindow(string text)
         {
             InitializeComponent();
+            MessageText.Text = text;
+        }
+
+        private void ButtonOK_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }
