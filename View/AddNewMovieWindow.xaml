@@ -18,11 +18,16 @@
                     Height="180"
                     Width="250">
             <TextBlock Text="Movie name" />
-            <TextBox Name="MovieNameBlock" Text="{Binding MovieName}"/>
+            <TextBox Name="MovieNameBlock"
+                     Text="{Binding MovieName}"/>
             <TextBlock Text="Year"/>
-            <TextBox Name="YearBlock" Text="{Binding Year}"/>
+            <TextBox Name="YearBlock"
+                     Text="{Binding Year}"
+                     PreviewTextInput="PreviewTextInput"/>
             <TextBlock Text="Rating"/>
-            <TextBox Name="RatingBlock" Text="{Binding Rating}"/>
+            <TextBox Name="RatingBlock"
+                     Text="{Binding Rating}"
+                     PreviewTextInput="PreviewTextInput"/>
             <TextBlock Text="Studio"/>
             <ComboBox DisplayMemberPath="Name"
                       ItemsSource="{Binding AllStudios}"

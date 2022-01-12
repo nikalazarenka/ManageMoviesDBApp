@@ -1,4 +1,5 @@
 ﻿using ManageMoviesDBApp.ViewModel;
+using System.Text.RegularExpressions;
 using System.Windows;
 
 namespace ManageMoviesDBApp.View
@@ -12,6 +13,12 @@ namespace ManageMoviesDBApp.View
         {
             InitializeComponent();
             DataContext = new DataManageVM();
+        }
+
+        private void PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
         }
     }
 }
