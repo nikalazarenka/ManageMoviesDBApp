@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ManageMoviesDBApp.View"
         mc:Ignorable="d"
-        Title="AddNewGenreWnd" Height="300" Width="300">
+        Title="AddNewGenreWindow" Height="300" Width="300"
+        Name="AddNewGenreWnd">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>

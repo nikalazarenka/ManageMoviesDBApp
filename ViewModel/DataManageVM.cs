@@ -136,6 +136,7 @@ namespace ManageMoviesDBApp.ViewModel
                 );
             }
         }
+
         private RelayCommand addNewStudio;
         public RelayCommand AddNewStudio
         {
@@ -174,7 +175,7 @@ namespace ManageMoviesDBApp.ViewModel
                 {
                     Window window = obj as Window;
                     string resultStr = string.Empty;
-                    if (StudioName is null || StudioName.Replace(" ", "").Length == 0)
+                    if (MovieName is null || MovieName.Replace(" ", "").Length == 0)
                     {
                         SetRedBlockControl(window, "MovieNameBlock");
                     }
