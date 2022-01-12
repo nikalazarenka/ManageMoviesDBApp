@@ -1,4 +1,4 @@
-﻿<Window x:Class="ManageMoviesDBApp.View. MainWindow"
+﻿<Window x:Class="ManageMoviesDBApp.View.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,6 +7,128 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="70"/>
+        </Grid.RowDefinitions>
+        <TabControl Grid.Row="0" SelectedItem="{Binding SelectedTabItem}">
+            <TabItem Name="MovieTab">
+                <TabItem.Header>
+                    <TextBlock Text="Movie"/>
+                </TabItem.Header>
+                <TabItem.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Edit"
+                                  Command="{Binding OpenEditWindow}"/>
+                        <MenuItem Header="Delete"
+                                  Command="{Binding DeleteItem}"/>
+                    </ContextMenu>
+                </TabItem.ContextMenu>
+                <ListView x:Name="ViewAllMovies"
+                          ItemsSource="{Binding AllMovies}"
+                          SelectedItem="{Binding SelectedMovie}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Movie name" DisplayMemberBinding="{Binding Path=Name}"/>
+                            <GridViewColumn Header="Genre" DisplayMemberBinding="{Binding Path=MovieGenre.Name}"/>
+                            <GridViewColumn Header="Studio" DisplayMemberBinding="{Binding Path=MovieStudio.Name}"/>
+                            <GridViewColumn Header="Year" DisplayMemberBinding="{Binding Path=Year}"/>
+                            <GridViewColumn Header="Rating" DisplayMemberBinding="{Binding Path=Rating}"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </TabItem>
+            <TabItem Name="GenreTab">
+                <TabItem.Header>
+                    <TextBlock Text="Genre"/>
+                </TabItem.Header>
+                <TabItem.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Edit"
+                                  Command="{Binding OpenEditWindow}"/>
+                        <MenuItem Header="Delete"
+                                  Command="{Binding DeleteItem}"/>
+                    </ContextMenu>
+                </TabItem.ContextMenu>
+                <ListView x:Name="ViewAllGenres"
+                          ItemsSource="{Binding AllGenres}"
+                          SelectedItem="{Binding SelectedGenre}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Genre name"
+                                             DisplayMemberBinding="{Binding Path=Name}"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </TabItem>
+            <TabItem Name="StudioTab">
+                <TabItem.Header>
+                    <TextBlock Text="Studio"/>
+                </TabItem.Header>
+                <TabItem.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Edit"
+                                  Command="{Binding OpenEditWindow}"/>
+                        <MenuItem Header="Delete"
+                                  Command="{Binding DeleteItem}"/>
+                    </ContextMenu>
+                </TabItem.ContextMenu>
+                <ListView x:Name="ViewAllStudios" 
+                          ItemsSource="{Binding AllStudios}"
+                          SelectedItem="{Binding SelectedStudio}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Studion name"
+                                            DisplayMemberBinding="{Binding Path=Name}"/>
+                            <GridViewColumn Header="Country"
+                                            DisplayMemberBinding="{Binding Path=StudioCountry.Name}"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </TabItem>
+            <TabItem Name="CountryTab">
+                <TabItem.Header>
+                    <TextBlock Text="Country"/>
+                </TabItem.Header>
+                <TabItem.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Edit"
+                                  Command="{Binding OpenEditWindow}"/>
+                        <MenuItem Header="Delete"
+                                  Command="{Binding DeleteItem}"/>
+                    </ContextMenu>
+                </TabItem.ContextMenu>
+                <ListView x:Name="ViewAllCountries"
+                          ItemsSource="{Binding AllCountries}"
+                          SelectedItem="{Binding SelectedCountry}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Country name"
+                                            DisplayMemberBinding="{Binding Path=Name}"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </TabItem>
+            <TabItem Name="SearchTab">
+                <TabItem.Header>
+                    <TextBlock Text="Search"/>
+                </TabItem.Header>
+                <TextBlock VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           FontSize="36"
+                           Foreground="CadetBlue"
+                           Text="In development"/>
+            </TabItem>
+        </TabControl>
+        <StackPanel Grid.Row="1"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch">
+            <Button MinWidth="200" Content="New Movie" Command="{Binding OpenAddNewMovieWindow}"/>
+            <Button MinWidth="200" Content="New Genre" Command="{Binding OpenAddNewGenreWindow}"/>
+            <Button MinWidth="200" Content="New Studio" Command="{Binding OpenAddNewStudioWindow}"/>
+            <Button MinWidth="200" Content="New Country" Command="{Binding OpenAddNewCountryWindow}"/>
+        </StackPanel>
 
     </Grid>
 </Window>

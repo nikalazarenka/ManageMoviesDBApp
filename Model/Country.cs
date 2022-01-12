@@ -8,6 +8,8 @@ namespace ManageMoviesDBApp.Model
 {
     public class Country
     {
-        
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public List<Studio> Studios { get; set; }
     }
 }

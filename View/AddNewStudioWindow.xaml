@@ -1,0 +1,32 @@
+﻿<Window x:Class="ManageMoviesDBApp.View.AddNewStudioWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ManageMoviesDBApp.View"
+        mc:Ignorable="d"
+        Title="AddNewStudioWindow" Height="300" Width="300"
+        Name="AddNewStudioWnd">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="70"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Vertical"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Height="180"
+                    Width="250">
+            <TextBlock Text="Studio name"/>
+            <TextBox Name="StudioNameBlock"  Text="{Binding StudioName}"/>
+            <TextBlock Text="Country"/>
+            <ComboBox DisplayMemberPath="Name"
+                      ItemsSource="{Binding AllCountries}"
+                      SelectedItem="{Binding Country}"/>
+        </StackPanel>
+        <Button Grid.Row="1"
+                Content="Add studio"
+                Command="{Binding AddNewStudio}"
+                CommandParameter="{Binding ElementName=AddNewStudioWnd}"/>
+    </Grid>
+</Window>

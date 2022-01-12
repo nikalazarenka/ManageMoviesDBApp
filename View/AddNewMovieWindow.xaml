@@ -1,0 +1,45 @@
+﻿<Window x:Class="ManageMoviesDBApp.View.AddNewMovieWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ManageMoviesDBApp.View"
+        mc:Ignorable="d"
+        Title="AddNewMovieWindow" Height="300" Width="300"
+        Name="AddNewMovieWnd">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="70"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Vertical"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Height="180"
+                    Width="250">
+            <TextBlock Text="Movie name" />
+            <TextBox Name="MovieNameBlock"
+                     Text="{Binding MovieName}"/>
+            <TextBlock Text="Year"/>
+            <TextBox Name="YearBlock"
+                     Text="{Binding Year}"
+                     PreviewTextInput="PreviewTextInput"/>
+            <TextBlock Text="Rating"/>
+            <TextBox Name="RatingBlock"
+                     Text="{Binding Rating}"
+                     PreviewTextInput="PreviewTextInput"/>
+            <TextBlock Text="Studio"/>
+            <ComboBox DisplayMemberPath="Name"
+                      ItemsSource="{Binding AllStudios}"
+                      SelectedItem="{Binding Studio}"/>
+            <TextBlock Text="Genre"/>
+            <ComboBox DisplayMemberPath="Name"
+                      ItemsSource="{Binding AllGenres}"
+                      SelectedItem="{Binding Genre}"/>
+        </StackPanel>
+        <Button Grid.Row="1"
+                Content="Add movie"
+                Command="{Binding AddNewMovie}"
+                CommandParameter="{Binding ElementName=AddNewMovieWnd}"/>
+    </Grid>
+</Window>

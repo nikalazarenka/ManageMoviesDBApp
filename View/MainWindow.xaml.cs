@@ -1,17 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ManageMoviesDBApp.ViewModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace ManageMoviesDBApp.View
 {
@@ -20,10 +9,19 @@ namespace ManageMoviesDBApp.View
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static ListView AllCountriesView;
+        public static ListView AllGenresView;
+        public static ListView AllStudiosView;
+        public static ListView AllMoviesView;
+
         public MainWindow()
         {
             InitializeComponent();
-            //Hello!
+            DataContext = new DataManageVM();
+            AllCountriesView = ViewAllCountries;
+            AllGenresView = ViewAllGenres;
+            AllStudiosView = ViewAllStudios;
+            AllMoviesView = ViewAllMovies;
         }
     }
 }
