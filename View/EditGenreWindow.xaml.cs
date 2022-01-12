@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ManageMoviesDBApp.Model;
+using ManageMoviesDBApp.ViewModel;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace ManageMoviesDBApp.View
 {
@@ -19,9 +9,13 @@ namespace ManageMoviesDBApp.View
     /// </summary>
     public partial class EditGenreWindow : Window
     {
-        public EditGenreWindow()
+        public EditGenreWindow(Genre genreToEdit)
         {
             InitializeComponent();
+            DataContext = new DataManageVM();
+            DataManageVM.SelectedGenre = genreToEdit;
+            DataManageVM.GenreName = genreToEdit.Name;
+
         }
     }
 }

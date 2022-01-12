@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ManageMoviesDBApp.Model
 {
@@ -16,5 +12,23 @@ namespace ManageMoviesDBApp.Model
         public virtual Studio Studio { get; set; }
         public int GenreId { get; set; }
         public virtual Genre Genre { get; set; }
+
+        [NotMapped]
+        public Studio MovieStudio
+        {
+            get
+            {
+                return DataWorker.GetStudioById(StudioId);
+            }
+        }
+
+        [NotMapped]
+        public Genre MovieGenre
+        {
+            get
+            {
+                return DataWorker.GetGenreById(GenreId);
+            }
+        }
     }
 }

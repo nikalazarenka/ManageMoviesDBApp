@@ -67,22 +67,74 @@ namespace ManageMoviesDBApp.ViewModel
             }
         }
 
+        #region PROPERTIES
         //properties for Country
-        public string CountryName { get; set; }
+        public static string CountryName { get; set; }
 
         //properties for Genre
-        public string GenreName { get; set; }
+        public static string GenreName { get; set; }
 
         //properties for Movie
-        public string MovieName { get; set; }
-        public Genre Genre { get; set; }
-        public Studio Studio { get; set; }
-        public int Year { get; set; }
-        public double Rating { get; set; }
+        public static string MovieName { get; set; }
+        public static Genre Genre { get; set; }
+        public static Studio Studio { get; set; }
+        public static int Year { get; set; }
+        public static double Rating { get; set; }
 
         //properties for Studio
-        public string StudioName { get; set; }
-        public Country Country { get; set; }
+        public static string StudioName { get; set; }
+        public static Country Country { get; set; }
+        #endregion
+
+        #region PROPERTIES FOR SELECTED ITEMS
+        public TabItem SelectedTabItem { get; set; }
+        public static Country SelectedCountry { get; set; }
+        public static Genre SelectedGenre { get; set; }
+        public static Movie SelectedMovie { get; set; }
+        public static Studio SelectedStudio { get; set; }
+        #endregion
+
+        #region COMMANDS TO DELETE
+        private RelayCommand deleteItem;
+        public RelayCommand DeleteItem
+        {
+            get
+            {
+                return deleteItem ?? new RelayCommand(obj =>
+                {
+                    string resultStr = "No items selected!";
+                    //country
+                    if (SelectedTabItem.Name == "CountryTab" && SelectedCountry != null)
+                    {
+                        resultStr = DataWorker.DeleteCountry(SelectedCountry);
+                        UpdateAllViews();
+                    }
+                    //genre
+                    if (SelectedTabItem.Name == "GenreTab" && SelectedGenre != null)
+                    {
+                        resultStr = DataWorker.DeleteGenre(SelectedGenre);
+                        UpdateAllViews();
+                    }
+                    //movie
+                    if (SelectedTabItem.Name == "MovieTab" && SelectedMovie != null)
+                    {
+                        resultStr = DataWorker.DeleteMovie(SelectedMovie);
+                        UpdateAllViews();
+                    }
+                    //studio
+                    if (SelectedTabItem.Name == "StudioTab" && SelectedStudio != null)
+                    {
+                        resultStr = DataWorker.DeleteStudio(SelectedStudio);
+                        UpdateAllViews();
+                    }
+                    //update
+                    SetNullValueToProperties();
+                    ShowMessageToUser(resultStr);
+                }
+                );
+            }
+        }
+        #endregion
 
         #region COMMANDS TO ADD
         private RelayCommand addNewCountry;
@@ -206,6 +258,109 @@ namespace ManageMoviesDBApp.ViewModel
 
         #endregion
 
+        #region COMMANDS TO EDIT
+        private RelayCommand editCountry;
+        public RelayCommand EditCountry
+        {
+            get
+            {
+                return editCountry ?? new RelayCommand(obj =>
+                {
+                    Window window = obj as Window;
+                    string resultStr = "No countries selected!";
+                    if (SelectedCountry != null)
+                    {
+                        resultStr = DataWorker.EditCountry(SelectedCountry, CountryName);
+                        UpdateAllViews();
+                        SetNullValueToProperties();
+                        ShowMessageToUser(resultStr);
+                        window.Close();
+                    }
+                    else
+                    {
+                        ShowMessageToUser(resultStr);
+                    }
+                }
+                );
+            }
+        }
+        private RelayCommand editGenre;
+        public RelayCommand EditGenre
+        {
+            get
+            {
+                return editGenre ?? new RelayCommand(obj =>
+                {
+                    Window window = obj as Window;
+                    string resultStr = "No genres selected!";
+                    if (SelectedGenre != null)
+                    {
+                        resultStr = DataWorker.EditGenre(SelectedGenre, GenreName);
+                        UpdateAllViews();
+                        SetNullValueToProperties();
+                        ShowMessageToUser(resultStr);
+                        window.Close();
+                    }
+                    else
+                    {
+                        ShowMessageToUser(resultStr);
+                    }
+                }
+                );
+            }
+        }
+        private RelayCommand editMovie;
+        public RelayCommand EditMovie
+        {
+            get
+            {
+                return editMovie ?? new RelayCommand(obj =>
+                {
+                    Window window = obj as Window;
+                    string resultStr = "No movies selected!";
+                    if (SelectedMovie != null)
+                    {
+                        resultStr = DataWorker.EditMovie(SelectedMovie, MovieName,Genre,Studio,Year,Rating);
+                        UpdateAllViews();
+                        SetNullValueToProperties();
+                        ShowMessageToUser(resultStr);
+                        window.Close();
+                    }
+                    else
+                    {
+                        ShowMessageToUser(resultStr);
+                    }
+                }
+                );
+            }
+        }
+        private RelayCommand editStudio;
+        public RelayCommand EditStudio
+        {
+            get
+            {
+                return editStudio ?? new RelayCommand(obj =>
+                {
+                    Window window = obj as Window;
+                    string resultStr = "No studios selected!";
+                    if (SelectedStudio != null)
+                    {
+                        resultStr = DataWorker.EditStudio(SelectedStudio, StudioName, Country);
+                        UpdateAllViews();
+                        SetNullValueToProperties();
+                        ShowMessageToUser(resultStr);
+                        window.Close();
+                    }
+                    else
+                    {
+                        ShowMessageToUser(resultStr);
+                    }
+                }
+                );
+            }
+        }
+        #endregion
+
         #region COMMANDS TO OPEN WINDOWS
         private RelayCommand openAddNewCountryWindow;
         public RelayCommand OpenAddNewCountryWindow
@@ -258,6 +413,39 @@ namespace ManageMoviesDBApp.ViewModel
                 );
             }
         }
+
+        private RelayCommand openEditWindow;
+        public RelayCommand OpenEditWindow
+        {
+            get
+            {
+                return openEditWindow ?? new RelayCommand(obj =>
+                {
+                    string resultStr = "No items selected!";
+                    if (SelectedTabItem.Name == "CountryTab" && SelectedCountry != null)
+                    {
+                        OpenEditCountryWindowMethod(SelectedCountry);
+                    }
+                    else if (SelectedTabItem.Name == "GenreTab" && SelectedGenre != null)
+                    {
+                        OpenEditGenreWindowMethod(SelectedGenre);
+                    }
+                    else if (SelectedTabItem.Name == "MovieTab" && SelectedMovie != null)
+                    {
+                        OpenEditMovieWindowMethod(SelectedMovie);
+                    }
+                    else if (SelectedTabItem.Name == "StudioTab" && SelectedStudio != null)
+                    {
+                        OpenEditStudioWindowMethod(SelectedStudio);
+                    }
+                    else
+                    {
+                        ShowMessageToUser(resultStr);
+                    }
+                }
+                );
+            }
+        }
         #endregion
 
         #region METHODS TO OPEN WINDOWS
@@ -285,29 +473,35 @@ namespace ManageMoviesDBApp.ViewModel
             SetCenterPositionAndOpen(addNewStudioWindow);
         }
 
-        private void OpenEditCountryWindowMethod()
+        private void OpenEditCountryWindowMethod(Country country)
         {
-            EditCountryWindow editCountryWindow = new EditCountryWindow();
+            EditCountryWindow editCountryWindow = new EditCountryWindow(country);
             SetCenterPositionAndOpen(editCountryWindow);
         }
 
-        private void OpenEditGenreWindowMethod()
+        private void OpenEditGenreWindowMethod(Genre genre)
         {
-            EditGenreWindow editGenreWindow = new EditGenreWindow();
+            EditGenreWindow editGenreWindow = new EditGenreWindow(genre);
             SetCenterPositionAndOpen(editGenreWindow);
         }
 
-        private void OpenEditMovieWindowMethod()
+        private void OpenEditMovieWindowMethod(Movie movie)
         {
-            EditMovieWindow editMovieWindow = new EditMovieWindow();
+            EditMovieWindow editMovieWindow = new EditMovieWindow(movie);
             SetCenterPositionAndOpen(editMovieWindow);
         }
 
-        private void OpenEditStudioWindowMethod()
+        private void OpenEditStudioWindowMethod(Studio studio)
         {
-            EditStudioWindow editStudioWindow = new EditStudioWindow();
+            EditStudioWindow editStudioWindow = new EditStudioWindow(studio);
             SetCenterPositionAndOpen(editStudioWindow);
         }
+        private void ShowMessageToUser(string message)
+        {
+            MessageWindow messageWindow = new MessageWindow(message);
+            SetCenterPositionAndOpen(messageWindow);
+        }
+
         private void SetCenterPositionAndOpen(Window window)
         {
             window.Owner = Application.Current.MainWindow;
@@ -369,12 +563,6 @@ namespace ManageMoviesDBApp.ViewModel
         {
             Control block = window.FindName(blockName) as Control;
             block.BorderBrush = Brushes.Red;
-        }
-
-        private void ShowMessageToUser(string message)
-        {
-            MessageWindow messageWindow = new MessageWindow(message);
-            SetCenterPositionAndOpen(messageWindow);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

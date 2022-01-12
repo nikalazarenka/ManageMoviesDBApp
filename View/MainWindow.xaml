@@ -11,17 +11,27 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="70"/>
         </Grid.RowDefinitions>
-        <TabControl Grid.Row="0">
+        <TabControl Grid.Row="0" SelectedItem="{Binding SelectedTabItem}">
             <TabItem Name="MovieTab">
                 <TabItem.Header>
                     <TextBlock Text="Movie"/>
                 </TabItem.Header>
-                <ListView x:Name="ViewAllMovies" ItemsSource="{Binding AllMovies}">
+                <TabItem.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Edit"
+                                  Command="{Binding OpenEditWindow}"/>
+                        <MenuItem Header="Delete"
+                                  Command="{Binding DeleteItem}"/>
+                    </ContextMenu>
+                </TabItem.ContextMenu>
+                <ListView x:Name="ViewAllMovies"
+                          ItemsSource="{Binding AllMovies}"
+                          SelectedItem="{Binding SelectedMovie}">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Movie name" DisplayMemberBinding="{Binding Path=Name}"/>
-                            <GridViewColumn Header="Genre" DisplayMemberBinding="{Binding Path=Genre.Name}"/>
-                            <GridViewColumn Header="Studio" DisplayMemberBinding="{Binding Path=Studio.Name}"/>
+                            <GridViewColumn Header="Genre" DisplayMemberBinding="{Binding Path=MovieGenre.Name}"/>
+                            <GridViewColumn Header="Studio" DisplayMemberBinding="{Binding Path=MovieStudio.Name}"/>
                             <GridViewColumn Header="Year" DisplayMemberBinding="{Binding Path=Year}"/>
                             <GridViewColumn Header="Rating" DisplayMemberBinding="{Binding Path=Rating}"/>
                         </GridView>
@@ -32,7 +42,17 @@
                 <TabItem.Header>
                     <TextBlock Text="Genre"/>
                 </TabItem.Header>
-                <ListView x:Name="ViewAllGenres" ItemsSource="{Binding AllGenres}">
+                <TabItem.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Edit"
+                                  Command="{Binding OpenEditWindow}"/>
+                        <MenuItem Header="Delete"
+                                  Command="{Binding DeleteItem}"/>
+                    </ContextMenu>
+                </TabItem.ContextMenu>
+                <ListView x:Name="ViewAllGenres"
+                          ItemsSource="{Binding AllGenres}"
+                          SelectedItem="{Binding SelectedGenre}">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Genre name"
@@ -45,13 +65,23 @@
                 <TabItem.Header>
                     <TextBlock Text="Studio"/>
                 </TabItem.Header>
-                <ListView x:Name="ViewAllStudios" ItemsSource="{Binding AllStudios}">
+                <TabItem.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Edit"
+                                  Command="{Binding OpenEditWindow}"/>
+                        <MenuItem Header="Delete"
+                                  Command="{Binding DeleteItem}"/>
+                    </ContextMenu>
+                </TabItem.ContextMenu>
+                <ListView x:Name="ViewAllStudios" 
+                          ItemsSource="{Binding AllStudios}"
+                          SelectedItem="{Binding SelectedStudio}">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Studion name"
                                             DisplayMemberBinding="{Binding Path=Name}"/>
                             <GridViewColumn Header="Country"
-                                            DisplayMemberBinding="{Binding Path=Country.Name}"/>
+                                            DisplayMemberBinding="{Binding Path=StudioCountry.Name}"/>
                         </GridView>
                     </ListView.View>
                 </ListView>
@@ -60,7 +90,17 @@
                 <TabItem.Header>
                     <TextBlock Text="Country"/>
                 </TabItem.Header>
-                <ListView x:Name="ViewAllCountries" ItemsSource="{Binding AllCountries}">
+                <TabItem.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Edit"
+                                  Command="{Binding OpenEditWindow}"/>
+                        <MenuItem Header="Delete"
+                                  Command="{Binding DeleteItem}"/>
+                    </ContextMenu>
+                </TabItem.ContextMenu>
+                <ListView x:Name="ViewAllCountries"
+                          ItemsSource="{Binding AllCountries}"
+                          SelectedItem="{Binding SelectedCountry}">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Country name"
@@ -73,6 +113,11 @@
                 <TabItem.Header>
                     <TextBlock Text="Search"/>
                 </TabItem.Header>
+                <TextBlock VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           FontSize="36"
+                           Foreground="CadetBlue"
+                           Text="In development"/>
             </TabItem>
         </TabControl>
         <StackPanel Grid.Row="1"

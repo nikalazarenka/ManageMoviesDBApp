@@ -1,16 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ManageMoviesDBApp.Model;
+using ManageMoviesDBApp.ViewModel;
+using System.Text.RegularExpressions;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace ManageMoviesDBApp.View
 {
@@ -19,9 +10,22 @@ namespace ManageMoviesDBApp.View
     /// </summary>
     public partial class EditMovieWindow : Window
     {
-        public EditMovieWindow()
+        public EditMovieWindow(Movie movieToEdit)
         {
             InitializeComponent();
+            DataContext = new DataManageVM();
+            DataManageVM.SelectedMovie = movieToEdit;
+            DataManageVM.MovieName = movieToEdit.Name;
+            DataManageVM.Year = movieToEdit.Year;
+            DataManageVM.Rating = movieToEdit.Rating;
+            DataManageVM.Studio = movieToEdit.Studio;
+            DataManageVM.Genre = movieToEdit.Genre;
+
+        }
+        private void PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
         }
     }
 }

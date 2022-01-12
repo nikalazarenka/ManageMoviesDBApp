@@ -43,8 +43,7 @@ namespace ManageMoviesDBApp.Model
             string result = "Already exsists!";
             using (ApplicationContext db = new ApplicationContext())
             {
-                bool isExsists = db.Countries.Any(country => country.Name == name);
-                if (!isExsists)
+                if (!db.Countries.Any(country => country.Name == name))
                 {
                     Country newCountry = new Country { Name = name };
                     db.Add(newCountry);
@@ -60,8 +59,7 @@ namespace ManageMoviesDBApp.Model
             string result = "Already exsists!";
             using(ApplicationContext db = new ApplicationContext())
             {
-                bool isExsists = db.Genres.Any(genre => genre.Name == name);
-                if (!isExsists)
+                if (!db.Genres.Any(genre => genre.Name == name))
                 {
                     Genre newGenre = new Genre { Name = name };
                     db.Add(newGenre);
@@ -77,8 +75,7 @@ namespace ManageMoviesDBApp.Model
             string result = "Already exsists!";
             using (ApplicationContext db = new ApplicationContext())
             {
-                bool isExsists = db.Movies.Any(movie => movie.Name == name);
-                if (!isExsists)
+                if (!db.Movies.Any(movie => movie.Name == name))
                 {
                     Movie newMovie = new Movie
                     {
@@ -102,8 +99,7 @@ namespace ManageMoviesDBApp.Model
             string result = "Already exsists!";
             using (ApplicationContext db = new ApplicationContext())
             {
-                bool isExsists = db.Studios.Any(studio => studio.Name == name);
-                if (!isExsists)
+                if (!db.Studios.Any(studio => studio.Name == name))
                 {
                     Studio newStudio = new Studio 
                     {
@@ -232,6 +228,31 @@ namespace ManageMoviesDBApp.Model
             }
 
             return result;
+        }
+
+        public static Country GetCountryById(int id)
+        {
+            using(ApplicationContext db = new ApplicationContext())
+            {
+                Country country = db.Countries.FirstOrDefault(c => c.Id == id);
+                return country;
+            }
+        }
+        public static Studio GetStudioById(int id)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                Studio studio = db.Studios.FirstOrDefault(s => s.Id == id);
+                return studio;
+            }
+        }
+        public static Genre GetGenreById(int id)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                Genre genre = db.Genres.FirstOrDefault(g => g.Id == id);
+                return genre;
+            }
         }
     }
 }

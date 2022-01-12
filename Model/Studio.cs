@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ManageMoviesDBApp.Model
 {
@@ -13,5 +10,14 @@ namespace ManageMoviesDBApp.Model
         public int CountryId { get; set; }
         public virtual Country Country { get; set; }
         public List<Movie> Movies { get; set; }
+
+        [NotMapped]
+        public Country StudioCountry
+        {
+            get
+            {
+                return DataWorker.GetCountryById(CountryId);
+            }
+        }
     }
 }
