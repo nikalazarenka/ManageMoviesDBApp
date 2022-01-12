@@ -14,6 +14,7 @@ namespace ManageMoviesDBApp.Model
         public double Rating { get; set; }
         public int StudioId { get; set; }
         public virtual Studio Studio { get; set; }
-        public List<Genre> Genres { get; set; }
+        public int GenreId { get; set; }
+        public virtual Genre Genre { get; set; }
     }
 }

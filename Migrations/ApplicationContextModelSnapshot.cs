@@ -18,21 +18,6 @@ namespace ManageMoviesDBApp.Migrations
                 .HasAnnotation("ProductVersion", "5.0.13")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("GenreMovie", b =>
-                {
-                    b.Property<int>("GenresId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MoviesId")
-                        .HasColumnType("int");
-
-                    b.HasKey("GenresId", "MoviesId");
-
-                    b.HasIndex("MoviesId");
-
-                    b.ToTable("GenreMovie");
-                });
-
             modelBuilder.Entity("ManageMoviesDBApp.Model.Country", b =>
                 {
                     b.Property<int>("Id")
@@ -70,6 +55,9 @@ namespace ManageMoviesDBApp.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("GenreId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -83,6 +71,8 @@ namespace ManageMoviesDBApp.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("GenreId");
 
                     b.HasIndex("StudioId");
 
@@ -109,28 +99,21 @@ namespace ManageMoviesDBApp.Migrations
                     b.ToTable("Studios");
                 });
 
-            modelBuilder.Entity("GenreMovie", b =>
-                {
-                    b.HasOne("ManageMoviesDBApp.Model.Genre", null)
-                        .WithMany()
-                        .HasForeignKey("GenresId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ManageMoviesDBApp.Model.Movie", null)
-                        .WithMany()
-                        .HasForeignKey("MoviesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("ManageMoviesDBApp.Model.Movie", b =>
                 {
+                    b.HasOne("ManageMoviesDBApp.Model.Genre", "Genre")
+                        .WithMany("Movies")
+                        .HasForeignKey("GenreId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("ManageMoviesDBApp.Model.Studio", "Studio")
                         .WithMany("Movies")
                         .HasForeignKey("StudioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Genre");
 
                     b.Navigation("Studio");
                 });
@@ -149,6 +132,11 @@ namespace ManageMoviesDBApp.Migrations
             modelBuilder.Entity("ManageMoviesDBApp.Model.Country", b =>
                 {
                     b.Navigation("Studios");
+                });
+
+            modelBuilder.Entity("ManageMoviesDBApp.Model.Genre", b =>
+                {
+                    b.Navigation("Movies");
                 });
 
             modelBuilder.Entity("ManageMoviesDBApp.Model.Studio", b =>

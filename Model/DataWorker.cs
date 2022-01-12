@@ -72,7 +72,7 @@ namespace ManageMoviesDBApp.Model
             return result;
         }
 
-        public static string CreateMovie(string name, List<Genre> genres, Studio studio, int year, double rating)
+        public static string CreateMovie(string name, Genre genre, Studio studio, int year, double rating)
         {
             string result = "Already exsists!";
             using (ApplicationContext db = new ApplicationContext())
@@ -83,7 +83,7 @@ namespace ManageMoviesDBApp.Model
                     Movie newMovie = new Movie
                     {
                         Name = name,
-                        Genres = genres,
+                        GenreId = genre.Id,
                         StudioId = studio.Id,
                         Year = year,
                         Rating = rating
@@ -201,14 +201,14 @@ namespace ManageMoviesDBApp.Model
             return result;
         }
 
-        public static string EditMovie(Movie oldMovie, string newName, List<Genre> newGenres, Studio newStudio, int newYear, double newRating)
+        public static string EditMovie(Movie oldMovie, string newName, Genre newGenre, Studio newStudio, int newYear, double newRating)
         {
             string result = "Not exsists!";
             using (ApplicationContext db = new ApplicationContext())
             {
                 Movie movie = db.Movies.FirstOrDefault(m => m.Id == oldMovie.Id);
                 movie.Name = newName;
-                movie.Genres = newGenres;
+                movie.GenreId = newGenre.Id;
                 movie.StudioId = newStudio.Id;
                 movie.Year = newYear;
                 movie.Rating = newRating;

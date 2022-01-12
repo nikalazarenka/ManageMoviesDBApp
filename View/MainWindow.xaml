@@ -19,11 +19,11 @@
                 <ListView x:Name="ViewAllMovies" ItemsSource="{Binding AllMovies}">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="Movie name"/>
-                            <GridViewColumn Header="Genre"/>
-                            <GridViewColumn Header="Studio"/>
-                            <GridViewColumn Header="Year"/>
-                            <GridViewColumn Header="Rating"/>
+                            <GridViewColumn Header="Movie name" DisplayMemberBinding="{Binding Path=Name}"/>
+                            <GridViewColumn Header="Genre" DisplayMemberBinding="{Binding Path=Genre.Name}"/>
+                            <GridViewColumn Header="Studio" DisplayMemberBinding="{Binding Path=Studio.Name}"/>
+                            <GridViewColumn Header="Year" DisplayMemberBinding="{Binding Path=Year}"/>
+                            <GridViewColumn Header="Rating" DisplayMemberBinding="{Binding Path=Rating}"/>
                         </GridView>
                     </ListView.View>
                 </ListView>
@@ -48,8 +48,10 @@
                 <ListView x:Name="ViewAllStudios" ItemsSource="{Binding AllStudios}">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="Studion name"/>
-                            <GridViewColumn Header="Country"/>
+                            <GridViewColumn Header="Studion name"
+                                            DisplayMemberBinding="{Binding Path=Name}"/>
+                            <GridViewColumn Header="Country"
+                                            DisplayMemberBinding="{Binding Path=Country.Name}"/>
                         </GridView>
                     </ListView.View>
                 </ListView>
@@ -75,7 +77,8 @@
         </TabControl>
         <StackPanel Grid.Row="1"
                     Orientation="Horizontal"
-                    HorizontalAlignment="Center">
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch">
             <Button MinWidth="200" Content="New Movie" Command="{Binding OpenAddNewMovieWindow}"/>
             <Button MinWidth="200" Content="New Genre" Command="{Binding OpenAddNewGenreWindow}"/>
             <Button MinWidth="200" Content="New Studio" Command="{Binding OpenAddNewStudioWindow}"/>

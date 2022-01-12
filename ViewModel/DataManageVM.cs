@@ -75,7 +75,7 @@ namespace ManageMoviesDBApp.ViewModel
 
         //properties for Movie
         public string MovieName { get; set; }
-        public List<Genre> Genres { get; set; }
+        public Genre Genre { get; set; }
         public Studio Studio { get; set; }
         public int Year { get; set; }
         public double Rating { get; set; }
@@ -94,7 +94,7 @@ namespace ManageMoviesDBApp.ViewModel
                 {
                     Window window = obj as Window;
                     string resultStr = string.Empty;
-                    if(string.IsNullOrWhiteSpace(CountryName))
+                    if(CountryName is null || CountryName.Replace(" ", "").Length == 0)
                     {
                         SetRedBlockControl(window, "CountryNameBlock");
                     }
@@ -120,7 +120,7 @@ namespace ManageMoviesDBApp.ViewModel
                 {
                     Window window = obj as Window;
                     string resultStr = string.Empty;
-                    if (string.IsNullOrWhiteSpace(GenreName))
+                    if (GenreName is null || GenreName.Replace(" ", "").Length == 0)
                     {
                         SetRedBlockControl(window, "GenreNameBlock");
                     }
@@ -136,6 +136,73 @@ namespace ManageMoviesDBApp.ViewModel
                 );
             }
         }
+        private RelayCommand addNewStudio;
+        public RelayCommand AddNewStudio
+        {
+            get
+            {
+                return addNewStudio ?? new RelayCommand(obj =>
+                {
+                    Window window = obj as Window;
+                    string resultStr = string.Empty;
+                    if (StudioName is null || StudioName.Replace(" ", "").Length == 0)
+                    {
+                        SetRedBlockControl(window, "StudioNameBlock");
+                    }
+                    if (Country is null)
+                    {
+                        MessageBox.Show("Choose a country!");
+                    }
+                    else
+                    {
+                        resultStr = DataWorker.CreateStudio(StudioName, Country);
+                        UpdateAllViews();
+                        ShowMessageToUser(resultStr);
+                        SetNullValueToProperties();
+                        window.Close();
+                    }
+                }
+                );
+            }
+        }
+        private RelayCommand addNewMovie;
+        public RelayCommand AddNewMovie
+        {
+            get
+            {
+                return addNewStudio ?? new RelayCommand(obj =>
+                {
+                    Window window = obj as Window;
+                    string resultStr = string.Empty;
+                    if (StudioName is null || StudioName.Replace(" ", "").Length == 0)
+                    {
+                        SetRedBlockControl(window, "MovieNameBlock");
+                    }
+                    if (Year==0 || Year>DateTime.Now.Year || Year < 1895)
+                    {
+                        SetRedBlockControl(window, "YearBlock");
+                    }
+                    if (Rating < 0 || Rating > 10)
+                    {
+                        SetRedBlockControl(window, "RatingBlock");
+                    }
+                    if (Studio is null)
+                    {
+                        MessageBox.Show("Choose a studio!");
+                    }
+                    else
+                    {
+                        resultStr = DataWorker.CreateMovie(MovieName, Genre, Studio, Year, Rating);
+                        UpdateAllViews();
+                        ShowMessageToUser(resultStr);
+                        SetNullValueToProperties();
+                        window.Close();
+                    }
+                }
+                );
+            }
+        }
+
         #endregion
 
         #region COMMANDS TO OPEN WINDOWS

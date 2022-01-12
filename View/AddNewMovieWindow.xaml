@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ManageMoviesDBApp.View"
         mc:Ignorable="d"
-        Title="AddNewMovieWindow" Height="300" Width="300">
+        Title="AddNewMovieWindow" Height="300" Width="300"
+        Name="AddNewMovieWnd">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -17,14 +18,23 @@
                     Height="200"
                     Width="250">
             <TextBlock Text="Movie name" />
-            <TextBox Text=""/>
+            <TextBox Name="MovieNameBlock" Text="{Binding MovieName}"/>
             <TextBlock Text="Year"/>
-            <TextBox Text=""/>
+            <TextBox Name="YearBlock" Text="{Binding Year}"/>
             <TextBlock Text="Rating"/>
-            <TextBox Text=""/>
+            <TextBox Name="RatingBlock" Text="{Binding Rating}"/>
             <TextBlock Text="Studio"/>
-            <ComboBox/>
+            <ComboBox DisplayMemberPath="Name"
+                      ItemsSource="{Binding AllStudios}"
+                      SelectedItem="{Binding Studio}"/>
+            <TextBlock Text="Genre"/>
+            <ComboBox DisplayMemberPath="Name"
+                      ItemsSource="{Binding AllGenres}"
+                      SelectedItem="{Binding Genre}"/>
         </StackPanel>
-        <Button Grid.Row="1" Content="Add movie"/>
+        <Button Grid.Row="1"
+                Content="Add movie"
+                Command="{Binding AddNewMovie}"
+                CommandParameter="{Binding ElementName=AddNewMovieWnd}"/>
     </Grid>
 </Window>
