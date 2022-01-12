@@ -15,7 +15,7 @@
         <StackPanel Grid.Row="0" Orientation="Vertical"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
-                    Height="200"
+                    Height="180"
                     Width="250">
             <TextBlock Text="Movie name" />
             <TextBox Name="MovieNameBlock" Text="{Binding MovieName}"/>
