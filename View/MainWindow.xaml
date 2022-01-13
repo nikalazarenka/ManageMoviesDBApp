@@ -109,16 +109,6 @@
                     </ListView.View>
                 </ListView>
             </TabItem>
-            <TabItem Name="SearchTab">
-                <TabItem.Header>
-                    <TextBlock Text="Search"/>
-                </TabItem.Header>
-                <TextBlock VerticalAlignment="Center"
-                           HorizontalAlignment="Center"
-                           FontSize="36"
-                           Foreground="CadetBlue"
-                           Text="In development"/>
-            </TabItem>
         </TabControl>
         <StackPanel Grid.Row="1"
                     Orientation="Horizontal"

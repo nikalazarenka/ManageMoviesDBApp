@@ -7,7 +7,7 @@ namespace ManageMoviesDBApp.Model
         public int Id { get; set; }
         public string Name { get; set; }
         public int Year { get; set; }
-        public double Rating { get; set; }
+        public int Rating { get; set; }
         public int StudioId { get; set; }
         public virtual Studio Studio { get; set; }
         public int GenreId { get; set; }

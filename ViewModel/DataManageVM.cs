@@ -79,7 +79,7 @@ namespace ManageMoviesDBApp.ViewModel
         public static Genre Genre { get; set; }
         public static Studio Studio { get; set; }
         public static int Year { get; set; }
-        public static double Rating { get; set; }
+        public static int Rating { get; set; }
 
         //properties for Studio
         public static string StudioName { get; set; }

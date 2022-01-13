@@ -70,7 +70,7 @@ namespace ManageMoviesDBApp.Model
             return result;
         }
 
-        public static string CreateMovie(string name, Genre genre, Studio studio, int year, double rating)
+        public static string CreateMovie(string name, Genre genre, Studio studio, int year, int rating)
         {
             string result = "Already exsists!";
             using (ApplicationContext db = new ApplicationContext())
@@ -197,7 +197,7 @@ namespace ManageMoviesDBApp.Model
             return result;
         }
 
-        public static string EditMovie(Movie oldMovie, string newName, Genre newGenre, Studio newStudio, int newYear, double newRating)
+        public static string EditMovie(Movie oldMovie, string newName, Genre newGenre, Studio newStudio, int newYear, int newRating)
         {
             string result = "Not exsists!";
             using (ApplicationContext db = new ApplicationContext())
