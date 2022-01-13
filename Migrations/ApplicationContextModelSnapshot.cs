@@ -61,8 +61,8 @@ namespace ManageMoviesDBApp.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("Rating")
-                        .HasColumnType("float");
+                    b.Property<int>("Rating")
+                        .HasColumnType("int");
 
                     b.Property<int>("StudioId")
                         .HasColumnType("int");

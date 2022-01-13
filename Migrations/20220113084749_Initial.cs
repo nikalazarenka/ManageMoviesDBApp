@@ -60,7 +60,7 @@ namespace ManageMoviesDBApp.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Year = table.Column<int>(type: "int", nullable: false),
-                    Rating = table.Column<double>(type: "float", nullable: false),
+                    Rating = table.Column<int>(type: "int", nullable: false),
                     StudioId = table.Column<int>(type: "int", nullable: false),
                     GenreId = table.Column<int>(type: "int", nullable: false)
                 },
