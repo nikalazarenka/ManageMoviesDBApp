@@ -1,7 +1,7 @@
 # ManageMoviesDBApp
 Приложение для управления базой данных
 
-Использовалось: WPF, Entity Framework (Code-First), паттерн MVVM.
+Использовалось: WPF, Entity Framework (Code-First).
 
 
 
